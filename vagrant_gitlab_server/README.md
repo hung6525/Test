@@ -14,5 +14,17 @@ Run `vagrant up` to setup the virtual server.
 - Installs latest Gitlab Multi Runner
 - Server at http://33.33.33.33 (http://gitlab.local.dev)
 
+-------------------------------------------
+
+vagrant ssh      #into gitlab server
+
+sudo gitlab-ctl status
+
+sudo vi /etc/gitlab/gitlab.rb    # configure file and will have gitlab fqdn.
+
+# First time to Gitlab url will prompt for new password for ROOT user
+# After new password created, login as root and new password.
+
+
 Example:
 https://www.youtube.com/watch?v=O7jgl0rWUlE
