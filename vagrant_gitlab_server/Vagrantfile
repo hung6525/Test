@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+GITLAB_IP = "172.16.245.101"
+GITLAB_PUB_IP = "192.168.1.222"
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/xenial64"
+    config.vm.hostname = "gitlab.local.dev"
+
+	config.vm.network "public_network", ip:"#{GITLAB_PUB_IP}"
+    config.vm.network :private_network, ip: "#{GITLAB_IP}"
+	
+    config.vm.network :forwarded_port, guest: 80, host: 8080
+
+    config.vm.provider "virtualbox" do |vb|
+        vb.name = "GitLab Server"
+        vb.memory = "2048"
+        vb.cpus = "2"
+    end
+
+    config.vm.provision :docker
+    config.vm.provision "shell", path: "install_gitlab.sh"
+end
